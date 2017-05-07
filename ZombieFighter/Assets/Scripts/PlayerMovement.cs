@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour {
     public AudioClip attackClip;
     public AudioClip biteClip;
 
+    List<GameObject> hittable = new List<GameObject>();
+
 	// Use this for initialization
 	void Awake () {
         anim = GetComponent<Animator>();
@@ -35,12 +37,12 @@ public class PlayerMovement : MonoBehaviour {
             transform.Rotate(Vector3.down * Time.deltaTime * hor * -100f);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+      /*  if (Input.GetKeyDown(KeyCode.Space))
         {
             anim.SetBool("Jumping", true);
             Invoke("StopJumping", 0.1f);
         }
-
+        */
         if (Input.GetMouseButtonDown(0))
         {
             anim.SetLayerWeight(1, 1f);
@@ -54,11 +56,14 @@ public class PlayerMovement : MonoBehaviour {
             anim.SetInteger("CurrentAction", 0);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && hittable.Count > 0)
         {
             anim.SetInteger("CurrentAction", 1);
             if (anim.GetInteger("CurrentAction") == 1)
                 audioSrc.PlayOneShot(biteClip);
+
+            transform.LookAt(hittable[0].transform);
+            hittable[0].GetComponent<Animator>().SetBool("Bitten", true);
         }
         if (Input.GetMouseButtonUp(1))
         {
@@ -80,5 +85,23 @@ public class PlayerMovement : MonoBehaviour {
     void StopJumping()
     {
         anim.SetBool("Jumping", false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Attackable")
+        {
+            hittable.Add(other.gameObject);
+            Debug.Log("add");
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Attackable")
+        {
+            hittable.Remove(other.gameObject);
+            Debug.Log("remove");
+        }
     }
 }
