@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip attackClip;
     public AudioClip biteClip;
-
     public float attackDamage = 30f;
     public float attackSpeed = 1.5f;
     public float maxHealth = 100f;
@@ -21,10 +20,13 @@ public class PlayerController : MonoBehaviour {
 	public Slider healthSlider;
 	public Slider brainSlider;
 	public float humans = 12f;
+<<<<<<< HEAD
 
     private bool pullMutation = false;
     private bool poisonMutation = false;
     private bool leapMuatation = false;
+=======
+>>>>>>> master
 
     public List<GameObject> hittable = new List<GameObject>();
 
@@ -100,11 +102,6 @@ public class PlayerController : MonoBehaviour {
                 AddHealth(50f);
             }
         }
-        // pull mutation
-        else if (attackTimer >= attackSpeed && pullMutation == true)
-        {
-            Pull();
-        }
 
         if (Input.GetMouseButtonUp(1))
         {
@@ -173,6 +170,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetTrigger("Die");
         dead = true;
 		SceneManager.LoadScene ("LoseScreen",LoadSceneMode.Single);
+<<<<<<< HEAD
     }
 
     private void Pull ()
@@ -190,5 +188,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+=======
+>>>>>>> master
     }
 }

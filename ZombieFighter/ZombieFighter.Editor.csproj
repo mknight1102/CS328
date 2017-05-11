@@ -112,9 +112,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-UnityScript">
-      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ZombieFighter.csproj">
@@ -123,17 +120,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FREE Footsteps System\scripts\Editor\CustomInspectors.cs" />
+    <Compile Include="Assets\DecalSystem\DecalSystem\Editor\DecalBuilder.cs" />
+    <Compile Include="Assets\DecalSystem\DecalSystem\Editor\DecalEditor.cs" />
+    <Compile Include="Assets\DecalSystem\DecalSystem\Editor\DecalPolygon.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Blood decal pack\readme.txt" />
-    <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />
-    <None Include="Assets\Shaders\AnimateBlood.shader" />
-    <None Include="Assets\Shaders\DrawSimple.shader" />
-    <None Include="Assets\Shaders\FilmGrain.shader" />
-    <None Include="Assets\Shaders\GenerateGravityMap.shader" />
-    <None Include="Assets\Shaders\Outlined_Diffuse.shader" />
-    <None Include="Assets\Shaders\Test.shader" />
+    <None Include="Assets\Textures\$self_illuminated_outlined_diffuse_113.shader" />
+    <None Include="Assets\Textures\DrawSimple.shader" />
+    <None Include="Assets\Textures\Outlined_Diffuse.shader" />
     <None Include="Assets\read me.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

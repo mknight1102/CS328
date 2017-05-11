@@ -6,11 +6,9 @@ public class BloodPostEffect : MonoBehaviour
 {
     public Shader BloodMapShader;
     public Shader BloodAnimShader;
-    public RenderTexture gravityMap;
 
     private Material BloodMapMat;
     private Material BloodAnimMat;
-
 
     // Use this for initialization
     void Start()
@@ -21,6 +19,11 @@ public class BloodPostEffect : MonoBehaviour
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        Graphics.Blit(source, gravityMap, BloodMapMat);   
+        Graphics.Blit(source, destination, BloodMapMat);
+        BloodAnimMat.SetTexture("_MainTex", BloodMapMat.GetTexture("_MainTex"));
+        Graphics.Blit(source, destination, BloodAnimMat);
+        
+        
+
     }
 }

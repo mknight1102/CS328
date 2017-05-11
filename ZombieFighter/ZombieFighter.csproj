@@ -80,10 +80,7 @@
     <Compile Include="Assets\FarlandSkies\Demo\Scripts\Skybox\SkyboxChanger.cs" />
     <Compile Include="Assets\FarlandSkies\Demo\Scripts\Skybox\SkyboxRotator.cs" />
     <Compile Include="Assets\Scripts\BloodPostEffect.cs" />
-    <Compile Include="Assets\Scripts\DefenseMode.cs" />
     <Compile Include="Assets\Scripts\FilmGrainPostEffect.cs" />
-    <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\PersonController.cs" />
     <Compile Include="Assets\Scripts\PersonState.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -93,6 +90,7 @@
     <None Include="Assets\Blood decal pack\readme.txt" />
     <None Include="Assets\Shaders\$self_illuminated_outlined_diffuse_113.shader" />
     <None Include="Assets\Shaders\AnimateBlood.shader" />
+    <None Include="Assets\Shaders\BloodShader.shader" />
     <None Include="Assets\Shaders\DrawSimple.shader" />
     <None Include="Assets\Shaders\FilmGrain.shader" />
     <None Include="Assets\Shaders\GenerateGravityMap.shader" />
