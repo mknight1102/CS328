@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -15,6 +17,9 @@ public class PlayerController : MonoBehaviour {
     public float attackSpeed = 1.5f;
     public float maxHealth = 100f;
     public float health = 100f;
+	public Slider healthSlider;
+	public Slider brainSlider;
+	public float humans = 12f;
 
     public List<GameObject> hittable = new List<GameObject>();
 
@@ -144,6 +149,7 @@ public class PlayerController : MonoBehaviour {
     public void TakeDamage(float amount)
     {
         health -= amount;
+		healthSlider.value = health;
         Debug.Log(health);
         if (health <= 0 && !dead)
         {
@@ -156,5 +162,6 @@ public class PlayerController : MonoBehaviour {
     {
         anim.SetTrigger("Die");
         dead = true;
+		SceneManager.LoadScene ("LoseScreen",LoadSceneMode.Single);
     }
 }

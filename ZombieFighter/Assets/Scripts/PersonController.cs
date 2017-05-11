@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PersonController : MonoBehaviour {
     private Renderer rend;
@@ -86,6 +88,14 @@ public class PersonController : MonoBehaviour {
         if (health <= 0)
         {
             Die();
+			GameObject.Find ("Zombie").GetComponent<PlayerController> ().humans -= 1;
+			//playerController.humans -= 1;
+			GameObject.Find ("Zombie").GetComponent<PlayerController> ().brainSlider.value = 12 - GameObject.Find ("Zombie").GetComponent<PlayerController> ().humans;
+			//playerController.brainSlider.value = 12 - playerController.humans;
+			if (GameObject.Find ("Zombie").GetComponent<PlayerController> ().brainSlider.value >= 12) 
+			{
+				SceneManager.LoadScene ("WinScreen");
+			}
         }
         
         else if (health / maxHealth <= .4)
