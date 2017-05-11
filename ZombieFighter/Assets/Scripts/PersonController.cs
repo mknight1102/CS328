@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PersonController : MonoBehaviour {
     private Renderer rend;
@@ -11,13 +13,12 @@ public class PersonController : MonoBehaviour {
     public AudioClip biteYell;
     public AudioClip[] boneCrunching;
     public AudioClip blood;
-    public AudioClip attackSFX;
     public Transform bloodLoc;
     public GameObject bloodSpray;
     public float attackSpeed = 2f;
     public float attackDamage = 15;
     public Transform trail;
-    public DefenseMode attackMode = DefenseMode.FISTS;
+
     private float maxHealth = 100;
     private Animator anim;
     private bool dead = false;
@@ -40,7 +41,6 @@ public class PersonController : MonoBehaviour {
 
     private float trailTimer = 0f;
     private float dropTrail = .5f;
-    private GameObject gameController;
 
     // Use this for initialization
 	void Awake () {
@@ -49,11 +49,6 @@ public class PersonController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         hidingPlaces = GameObject.FindGameObjectsWithTag("HidingPlace");
-        gameController = GameObject.FindGameObjectWithTag("Controller");
-        if (attackMode == DefenseMode.WEAPON)
-        {
-            anim.SetBool("HasWeapon", true);
-        }
     }
 	
 	// Update is called once per frame
@@ -93,6 +88,14 @@ public class PersonController : MonoBehaviour {
         if (health <= 0)
         {
             Die();
+			GameObject.Find ("Zombie").GetComponent<PlayerController> ().humans -= 1;
+			//playerController.humans -= 1;
+			GameObject.Find ("Zombie").GetComponent<PlayerController> ().brainSlider.value = 12 - GameObject.Find ("Zombie").GetComponent<PlayerController> ().humans;
+			//playerController.brainSlider.value = 12 - playerController.humans;
+			if (GameObject.Find ("Zombie").GetComponent<PlayerController> ().brainSlider.value >= 12) 
+			{
+				SceneManager.LoadScene ("WinScreen");
+			}
         }
         
         else if (health / maxHealth <= .4)
@@ -117,7 +120,6 @@ public class PersonController : MonoBehaviour {
         anim.SetBool("Dead", true);
         Destroy(gameObject, 15.0f);
         gameObject.tag = "Untagged";
-        gameController.GetComponent<GameController>().UpdatePeople();
         player.GetComponent<PlayerController>().hittable.Remove(gameObject);
     }
 
@@ -131,7 +133,6 @@ public class PersonController : MonoBehaviour {
         Destroy(gameObject, 15.0f);
         gameObject.tag = "Untagged";
         player.GetComponent<PlayerController>().hittable.Remove(gameObject);
-        gameController.GetComponent<GameController>().UpdatePeople();
     }
 
     private void SetLayerRecursively(Transform root)
@@ -258,7 +259,6 @@ public class PersonController : MonoBehaviour {
     {
         if (attackTimer >= attackSpeed)
         {
-            audioSource.PlayOneShot(attackSFX);
             attackTimer = 0;
             // hit player
             Vector3 lookPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
@@ -344,6 +344,7 @@ public class PersonController : MonoBehaviour {
                 // TODO: What do we do here? We kill them after some sec?
                 Destroy(paintSplatter.gameObject, 180);
             }
+
         }
     }
 }
