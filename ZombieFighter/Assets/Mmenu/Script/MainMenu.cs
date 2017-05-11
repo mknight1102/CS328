@@ -15,9 +15,9 @@ public class MainMenu : MonoBehaviour {
 	public Toggle fullscreen;
 	public string SceneName;
 
-	void Start (){
+	void Awake (){
 		QualitySettings.SetQualityLevel ((int)PlayerPrefs.GetFloat("Quality"));
-		AudioListener.volume = PlayerPrefs.GetFloat("Volume");
+		//AudioListener.volume = PlayerPrefs.GetFloat("Volume");
 		int qualityLevel = QualitySettings.GetQualityLevel();
 
 	}

@@ -41,6 +41,7 @@ public class PersonController : MonoBehaviour {
 
     private float trailTimer = 0f;
     private float dropTrail = .5f;
+	public bool hasWeapon;
 
     // Use this for initialization
 	void Awake () {
@@ -49,6 +50,9 @@ public class PersonController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
         hidingPlaces = GameObject.FindGameObjectsWithTag("HidingPlace");
+		if (hasWeapon) {
+			anim.SetBool ("HasWeapon", true);
+		}
     }
 	
 	// Update is called once per frame

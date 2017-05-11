@@ -8,7 +8,7 @@ public class Music : MonoBehaviour {
     public GameObject player;
     private Animator anim;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         anim = player.GetComponent<Animator>();
 	}
 	

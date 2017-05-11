@@ -20,13 +20,11 @@ public class PlayerController : MonoBehaviour {
 	public Slider healthSlider;
 	public Slider brainSlider;
 	public float humans = 12f;
-<<<<<<< HEAD
 
     private bool pullMutation = false;
     private bool poisonMutation = false;
     private bool leapMuatation = false;
-=======
->>>>>>> master
+
 
     public List<GameObject> hittable = new List<GameObject>();
 
@@ -170,7 +168,6 @@ public class PlayerController : MonoBehaviour {
         anim.SetTrigger("Die");
         dead = true;
 		SceneManager.LoadScene ("LoseScreen",LoadSceneMode.Single);
-<<<<<<< HEAD
     }
 
     private void Pull ()
@@ -188,7 +185,6 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
-=======
->>>>>>> master
+
     }
 }
