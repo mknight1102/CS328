@@ -11,10 +11,15 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip attackClip;
     public AudioClip biteClip;
+
     public float attackDamage = 30f;
     public float attackSpeed = 1.5f;
     public float maxHealth = 100f;
     public float health = 100f;
+
+    private bool pullMutation = false;
+    private bool poisonMutation = false;
+    private bool leapMuatation = false;
 
     public List<GameObject> hittable = new List<GameObject>();
 
@@ -90,6 +95,11 @@ public class PlayerController : MonoBehaviour {
                 AddHealth(50f);
             }
         }
+        // pull mutation
+        else if (attackTimer >= attackSpeed && pullMutation == true)
+        {
+            Pull();
+        }
 
         if (Input.GetMouseButtonUp(1))
         {
@@ -156,5 +166,22 @@ public class PlayerController : MonoBehaviour {
     {
         anim.SetTrigger("Die");
         dead = true;
+    }
+
+    private void Pull ()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                if (hit.transform.tag == "Attackable")
+                {
+                    Vector3 dir = (transform.position - hit.transform.position).normalized;
+                    hit.transform.position = Vector3.MoveTowards(hit.transform.position, transform.position, 30f);
+                }
+            }
+        }
     }
 }
